@@ -29,7 +29,7 @@
                 @if (User.Identity.IsAuthenticated && User.IsInRole(GWAppDev1.Utils.Role.Staff))
                 {
                     <ul class="nav navbar-nav">
-                        <li>@Html.ActionLink("View Page Staff", "Index", "Staff")</li>
+                        <li>@Html.ActionLink("View Page Staff", "Index", "Staffs")</li>
                     </ul>
                 }
                 @if (User.Identity.IsAuthenticated && User.IsInRole(GWAppDev1.Utils.Role.Trainer))

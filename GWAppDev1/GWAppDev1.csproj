@@ -172,6 +172,7 @@
     <Compile Include="Controllers\AdminController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
+    <Compile Include="Controllers\StaffsController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -183,10 +184,36 @@
     <Compile Include="Migrations\202112150437247_UpdateTableRegisterModels.designer.cs">
       <DependentUpon>202112150437247_UpdateTableRegisterModels.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202112171649075_CreateTableCourseCategory.cs" />
+    <Compile Include="Migrations\202112171649075_CreateTableCourseCategory.designer.cs">
+      <DependentUpon>202112171649075_CreateTableCourseCategory.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202112171701556_UpdateTableCourseCategory.cs" />
+    <Compile Include="Migrations\202112171701556_UpdateTableCourseCategory.designer.cs">
+      <DependentUpon>202112171701556_UpdateTableCourseCategory.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202112172107478_CreateTableCourseAndAddCategory.cs" />
+    <Compile Include="Migrations\202112172107478_CreateTableCourseAndAddCategory.designer.cs">
+      <DependentUpon>202112172107478_CreateTableCourseAndAddCategory.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202112172109292_UpdateTableCourseAndAddCategory.cs" />
+    <Compile Include="Migrations\202112172109292_UpdateTableCourseAndAddCategory.designer.cs">
+      <DependentUpon>202112172109292_UpdateTableCourseAndAddCategory.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202112172215460_UpdateTableCouresCategory.cs" />
+    <Compile Include="Migrations\202112172215460_UpdateTableCouresCategory.designer.cs">
+      <DependentUpon>202112172215460_UpdateTableCouresCategory.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202112172358022_UpdateTableCourseAndAddCourseCategory.cs" />
+    <Compile Include="Migrations\202112172358022_UpdateTableCourseAndAddCourseCategory.designer.cs">
+      <DependentUpon>202112172358022_UpdateTableCourseAndAddCourseCategory.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\ApplicationDbContext.cs" />
     <Compile Include="Models\ApplicationUser.cs" />
+    <Compile Include="Models\Course.cs" />
+    <Compile Include="Models\CourseCategory.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Models\Staff.cs" />
     <Compile Include="Models\Trainee.cs" />
@@ -194,6 +221,8 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
     <Compile Include="Utils\Role.cs" />
+    <Compile Include="ViewModels\ChangePasswordViewModel.cs" />
+    <Compile Include="ViewModels\CourseCategoriesViewModel.cs" />
     <Compile Include="ViewModels\RegisterTrainer.cs" />
     <Compile Include="ViewModels\RegisterViewModels.cs" />
   </ItemGroup>
@@ -259,6 +288,17 @@
     <Content Include="Views\Admin\ShowStaffInfo.cshtml" />
     <Content Include="Views\Admin\CreateStaff.cshtml" />
     <Content Include="Views\Admin\EditTrainerInfo.cshtml" />
+    <Content Include="Views\Admin\EditStaffInfo.cshtml" />
+    <Content Include="Views\Staffs\CreateTrainee.cshtml" />
+    <Content Include="Views\Staffs\ShowTraineeInfo.cshtml" />
+    <Content Include="Views\Staffs\Index.cshtml" />
+    <Content Include="Views\Staffs\EditTraineeInfo.cshtml" />
+    <Content Include="Views\Staffs\CreateCourseCategory.cshtml" />
+    <Content Include="Views\Staffs\ShowCourseCategory.cshtml" />
+    <Content Include="Views\Staffs\EditCourseCategory.cshtml" />
+    <Content Include="Views\Staffs\CreateCourse.cshtml" />
+    <Content Include="Views\Staffs\ShowCourse.cshtml" />
+    <Content Include="Views\Staffs\EditCourse.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -282,6 +322,24 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202112150437247_UpdateTableRegisterModels.resx">
       <DependentUpon>202112150437247_UpdateTableRegisterModels.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202112171649075_CreateTableCourseCategory.resx">
+      <DependentUpon>202112171649075_CreateTableCourseCategory.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202112171701556_UpdateTableCourseCategory.resx">
+      <DependentUpon>202112171701556_UpdateTableCourseCategory.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202112172107478_CreateTableCourseAndAddCategory.resx">
+      <DependentUpon>202112172107478_CreateTableCourseAndAddCategory.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202112172109292_UpdateTableCourseAndAddCategory.resx">
+      <DependentUpon>202112172109292_UpdateTableCourseAndAddCategory.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202112172215460_UpdateTableCouresCategory.resx">
+      <DependentUpon>202112172215460_UpdateTableCouresCategory.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202112172358022_UpdateTableCourseAndAddCourseCategory.resx">
+      <DependentUpon>202112172358022_UpdateTableCourseAndAddCourseCategory.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

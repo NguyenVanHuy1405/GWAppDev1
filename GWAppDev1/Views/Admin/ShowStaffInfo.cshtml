@@ -33,10 +33,9 @@
               
 
                 <td>
-                    @Html.ActionLink("See Details", "Details", new { id = staff.Id }, new { @class = "btn btn-primary" })
-                    @Html.ActionLink("Edit Trainee", "Edit", new { id =staff.Id },
-                    new { @class = "btn btn-success" })
-                    @Html.ActionLink("DeleteTrainee", "Delete", new { id = staff.Id }
+                    @Html.ActionLink("Edit Staff Info", "EditStaffInfo", new { id = staff.Id },
+                      new { @class = "btn btn-success" })
+                    @Html.ActionLink("DeleteStaff", "DeleteStaff", new { id = staff.Id }
                     , new { @class = "btn btn-danger", onClick = "return confirm('Are you sure?')" })
 
                 </td>

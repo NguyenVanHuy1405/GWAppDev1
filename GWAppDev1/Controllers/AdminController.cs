@@ -175,7 +175,6 @@ namespace GWAppDev1.Controllers
                 trainerInDb.Specialty = model.Specialty;
                 _context.SaveChanges();
                 return RedirectToAction("ShowTrainerInfo");
-
         }
    [HttpGet]
     public ActionResult DeleteTrainer(int id)
@@ -231,6 +230,22 @@ namespace GWAppDev1.Controllers
             _context.Staffs.Remove(staffs);
             _context.SaveChanges();
             return RedirectToAction("ShowStaffInfo");
+        }
+        [HttpGet]
+        public ActionResult ChangePasswordTrainer()
+        {
+            return View();
+        }
+        [HttpPost]
+        public ActionResult ChangePasswordTrainer(string password)
+        {
+            var CurrentTrainerId = User.Identity.GetUserId();
+            var TrainerInDb = _userManager.FindById(CurrentTrainerId);
+            string newPassword = password;
+            _userManager.RemovePassword(CurrentTrainerId);
+            _userManager.AddPassword(CurrentTrainerId, newPassword);
+            _userManager.Update(TrainerInDb);
+            return RedirectToAction("ShowTrainerInfo");
         }
     }
 }

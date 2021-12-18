@@ -232,16 +232,5 @@ namespace GWAppDev1.Controllers
             _context.SaveChanges();
             return RedirectToAction("ShowStaffInfo");
         }
-        [HttpGet]
-        public ActionResult ChangeTrainerPassword()
-        {
-            return View();
-        }
-        [HttpGet]
-        public ActionResult ChangePassword()
-        {
-            return View();
-        }
-
     }
 }

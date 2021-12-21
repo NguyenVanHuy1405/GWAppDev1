@@ -37,7 +37,7 @@
                     new { @class = "btn btn-success" })
                     @Html.ActionLink("DeleteTrainer", "DeleteTrainer", new { id = trainer.Id }
                     , new { @class = "btn btn-danger", onClick = "return confirm('Are you sure?')" })
-                    @Html.ActionLink("ChangePassword", "ChangePasswordTrainer", new {id=trainer.Id},
+                    @Html.ActionLink("ChangePassword", "ChangePasswordTrainer", new {id=trainer.UserId},
                    new {@class="btn btn-primary"})
                 </td>
             </tr>

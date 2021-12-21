@@ -6,7 +6,7 @@ using System.Web;
 
 namespace GWAppDev1.ViewModels
 {
-    public class ChangePasswordViewModel
+    public class ResetPaas
         {
             [Required]
             [DataType(DataType.Password)]

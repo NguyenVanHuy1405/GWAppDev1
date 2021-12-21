@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
 using GWAppDev1.ViewModels;
-using static GWAppDev1.Controllers.ManageController;
+
 
 namespace GWAppDev1.Controllers
 {
@@ -237,15 +237,19 @@ namespace GWAppDev1.Controllers
             return View();
         }
         [HttpPost]
-        public ActionResult ChangePasswordTrainer(string password)
+        [ValidateAntiForgeryToken]
+        public async Task<ActionResult> ChangePasswordTrainer(ResetPaas viewModel, string id)
         {
-            var CurrentTrainerId = User.Identity.GetUserId();
-            var TrainerInDb = _userManager.FindById(CurrentTrainerId);
-            string newPassword = password;
-            _userManager.RemovePassword(CurrentTrainerId);
-            _userManager.AddPassword(CurrentTrainerId, newPassword);
-            _userManager.Update(TrainerInDb);
+            var Db = _context.Users.SingleOrDefault(t => t.Id == id);
+            var result = await UserManager.ChangePasswordAsync(id,viewModel.CurrentPassword,viewModel.NewPassword);
+            if(!result.Succeeded)
+            {
+                AddErrors(result);
+                return View(viewModel);
+            }
+            var userId = await UserManager.FindByIdAsync(id);
             return RedirectToAction("ShowTrainerInfo");
         }
+            
+        }
     }
-}

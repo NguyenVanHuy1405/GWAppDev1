@@ -256,5 +256,21 @@ namespace GWAppDev1.Controllers
             return View();
         }
 
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<ActionResult> ChangePasswordStaff(ResetPaas viewModel, string id)
+        {
+            var Db = _context.Users.SingleOrDefault(t => t.Id == id);
+            var result = await UserManager.ChangePasswordAsync(id, viewModel.CurrentPassword, viewModel.NewPassword);
+            if (!result.Succeeded)
+            {
+                AddErrors(result);
+                return View(viewModel);
+            }
+            var userId = await UserManager.FindByIdAsync(id);
+            return RedirectToAction("ShowStaffInfo");
+        }
+
+
     }
     }

@@ -13,7 +13,7 @@
 @using (Html.BeginForm("ShowCourseCategory", "Staffs", FormMethod.Get))
 {
     <div class="form-group">
-        @Html.TextBox("searchString", null, new { @class = "form-control", placeholder = "Search by trainee name or descriptions" })
+        @Html.TextBox("searchString", null, new { @class = "form-control", placeholder = "Search by CategoryCourse name or descriptions" })
     </div>
     <button type="submit" class="btn btn-primary">Search</button>
 }

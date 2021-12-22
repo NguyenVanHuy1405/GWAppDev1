@@ -250,6 +250,11 @@ namespace GWAppDev1.Controllers
             var userId = await UserManager.FindByIdAsync(id);
             return RedirectToAction("ShowTrainerInfo");
         }
-            
+        [HttpGet]
+        public ActionResult ChangePasswordStaff()
+        {
+            return View();
         }
+
+    }
     }

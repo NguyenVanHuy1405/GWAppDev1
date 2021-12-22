@@ -9,7 +9,5 @@ namespace GWAppDev1.ViewModels
     public class RegisterTrainer
     {
         public Trainer Trainer { get; set; }
-
-
     }
 }

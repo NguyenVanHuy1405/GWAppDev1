@@ -1,0 +1,100 @@
+﻿using GWAppDev1.Models;
+using GWAppDev1.Utils;
+using Microsoft.AspNet.Identity.Owin;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Web;
+using System.Web.Mvc;
+
+namespace GWAppDev1.Controllers
+{
+    [Authorize(Roles = Role.Trainer)]
+    public class TrainersController : Controller
+    {
+        private ApplicationDbContext _context;
+        private ApplicationSignInManager _signInManager;
+        private ApplicationUserManager _userManager;
+        public TrainersController()
+        {
+            _context = new ApplicationDbContext();
+        }
+
+        public TrainersController(ApplicationUserManager userManager, ApplicationSignInManager signInManager)
+        {
+            UserManager = userManager;
+            SignInManager = signInManager;
+        }
+        public ApplicationSignInManager SignInManager
+        {
+            get
+            {
+                return _signInManager ?? HttpContext.GetOwinContext().Get<ApplicationSignInManager>();
+            }
+            private set
+            {
+                _signInManager = value;
+            }
+        }
+
+        public ApplicationUserManager UserManager
+        {
+            get
+            {
+                return _userManager ?? HttpContext.GetOwinContext().GetUserManager<ApplicationUserManager>();
+            }
+            private set
+            {
+                _userManager = value;
+            }
+        }
+        // GET: Trainee
+        public ActionResult Index()
+        {
+            var trainer = _context.Trainers.ToList();
+            return View(trainer);
+        }
+        [HttpGet]
+        public ActionResult Detail(int id)
+        {
+            var trainer = _context.Trainers.SingleOrDefault(t => t.Id == id);
+            if (trainer == null)
+            {
+                return HttpNotFound();
+            }
+            return View(trainer);
+        }
+        [HttpGet]
+        public ActionResult EditTrainerInfo(int id)
+        {
+            var trainer = _context.Trainers.SingleOrDefault(t => t.Id == id);
+            if (trainer == null)
+            {
+                return HttpNotFound();
+            }
+            return View(trainer);
+        }
+        [HttpPost]
+
+        public ActionResult EditTrainerInfo(Trainer model)
+        {
+            if (!ModelState.IsValid)
+            {
+                return View(model);
+            }
+            var trainerInDb = _context.Trainers.SingleOrDefault(t => t.Id == model.Id);
+
+            if (trainerInDb == null)
+            {
+                return HttpNotFound();
+            }
+            trainerInDb.Fullname = model.Fullname;
+            trainerInDb.Age = model.Age;
+            trainerInDb.Address = model.Address;
+            trainerInDb.Specialty = model.Specialty;
+            _context.SaveChanges();
+            return RedirectToAction("ShowTrainerInfo");
+        }
+
+    }
+}

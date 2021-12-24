@@ -15,6 +15,7 @@ namespace GWAppDev1.Models
         public DbSet<CourseCategory> courseCategories { get;set;}
         public DbSet<Course> Courses { get;set;}
         public DbSet<CourseTrainer> CoursesTrainers { get;set;}
+        public DbSet <CourseTrainee> CourseTrainees { get;set;}
         public static ApplicationDbContext Create()
         {
             return new ApplicationDbContext();

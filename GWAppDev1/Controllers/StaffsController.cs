@@ -379,5 +379,56 @@ namespace GWAppDev1.Controllers
             return RedirectToAction("ShowTrainers", new { id = id });
         }
 
+        [HttpGet]
+        public ActionResult ShowTrainees(int id)
+        {
+            var trainers = _context.CourseTrainees
+                .Where(t => t.CourseId == id)
+                .Select(t => t.User)
+                .ToList();
+            return View(trainers);
+        }
+        [HttpGet]
+        public ActionResult AssignTrainee()
+        {
+            var role = _context.Roles.SingleOrDefault(r => r.Name.Equals(Role.Trainee));
+            var users = _context.Users
+                .Where(m => m.Roles.Any(r => r.RoleId.Equals(role.Id))).ToList();
+            var viewModel = new CoursesTraineesViewModel
+            {
+                Courses = _context.Courses.ToList(),
+                Users = users
+            };
+            return View(viewModel);
+        }
+        [HttpPost]
+        public ActionResult AssignTrainee(CoursesTraineesViewModel viewModel)
+        {
+            var model = new CourseTrainee
+            {
+                CourseId = viewModel.CourseId,
+                UserId = viewModel.UserId
+            };
+            try
+            {
+                _context.CourseTrainees.Add(model);
+                _context.SaveChanges();
+            }
+            catch (System.Exception)
+            {
+                ModelState.AddModelError("duplicate", "User already existed in team");
+                var role = _context.Roles.SingleOrDefault(r => r.Name.Equals(Role.Trainee));
+                var users = _context.Users
+                    .Where(m => m.Roles.Any(r => r.RoleId.Equals(role.Id))).ToList();
+                var NewviewModel = new CoursesTraineesViewModel
+                {
+                    Courses = _context.Courses.ToList(),
+                    Users = users
+                };
+                return View(NewviewModel);
+            }
+            return RedirectToAction("ShowCourse");
+        }
+
     }
 }

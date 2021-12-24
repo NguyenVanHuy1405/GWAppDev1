@@ -221,8 +221,7 @@ namespace GWAppDev1.Controllers
         [HttpGet]
         public ActionResult DeleteStaff(int id)
         {
-            var userId = User.Identity.GetUserId();
-            var staffs = _context.Staffs.SingleOrDefault(t => t.Id == id && t.UserId == userId);
+            var staffs = _context.Staffs.SingleOrDefault(t => t.Id == id);
             if (staffs == null)
             {
                 return HttpNotFound();

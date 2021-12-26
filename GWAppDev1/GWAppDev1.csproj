@@ -222,6 +222,10 @@
     <Compile Include="Migrations\202112240120489_UpdateTableCourseTrainee.designer.cs">
       <DependentUpon>202112240120489_UpdateTableCourseTrainee.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202112261638569_Update2.cs" />
+    <Compile Include="Migrations\202112261638569_Update2.designer.cs">
+      <DependentUpon>202112261638569_Update2.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\ApplicationDbContext.cs" />
@@ -324,7 +328,7 @@
     <Content Include="Views\Admin\ChangePasswordTrainer.cshtml" />
     <Content Include="Views\Admin\ChangePasswordStaff.cshtml" />
     <Content Include="Views\Staffs\ShowTrainers.cshtml" />
-    <Content Include="Views\Staffs\AssignTrainer.cshtml" />
+    <Content Include="Views\Staffs\AssignCoursesTrainer.cshtml" />
     <Content Include="Views\Trainees\Index.cshtml" />
     <Content Include="Views\Trainees\Detail.cshtml" />
     <Content Include="Views\Trainers\Index.cshtml" />
@@ -382,6 +386,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202112240120489_UpdateTableCourseTrainee.resx">
       <DependentUpon>202112240120489_UpdateTableCourseTrainee.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202112261638569_Update2.resx">
+      <DependentUpon>202112261638569_Update2.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

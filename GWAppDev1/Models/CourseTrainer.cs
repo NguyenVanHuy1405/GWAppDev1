@@ -16,8 +16,8 @@ namespace GWAppDev1.Models
         public Course Course { get; set; }
         [Key]
         [Column(Order = 2)]
-        [ForeignKey("Trainer")]
-        public string TrainerId { get; set; }
-        public ApplicationUser Trainer { get; set; }
+        [ForeignKey("User")]
+        public string UserId { get; set; }
+        public ApplicationUser User { get; set; }
     }
 }

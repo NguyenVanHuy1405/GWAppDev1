@@ -380,9 +380,86 @@ namespace GWAppDev1.Controllers
             }
             return RedirectToAction("ShowCourse");
         }
-       
+        [HttpGet]
+        public ActionResult RemoveTrainer(int id, string trainerId)
+        {
+            var userinCourse = _context.CoursesTrainers.SingleOrDefault(
+              u => u.CourseId == id && u.UserId == trainerId);
 
-   
+            if (userinCourse == null) return HttpNotFound();
+
+            _context.CoursesTrainers.Remove(userinCourse);
+            _context.SaveChanges();
+
+            return RedirectToAction("ShowTrainers", new { id = id });
+
+        }
+        [HttpGet]
+        public ActionResult ShowTrainees(int id)
+        {
+            var users = _context.CourseTrainees
+                .Where(t => t.CourseId == id)
+                .Select(t => t.User)
+                .ToList();
+            ViewBag.courseId = id;
+            return View(users);
+        }
+        [HttpGet]
+        public ActionResult AssignTrainee()
+        {
+            var role = _context.Roles.SingleOrDefault(r => r.Name.Equals(Role.Trainee));
+            var users = _context.Users
+                .Where(m => m.Roles.Any(r => r.RoleId.Equals(role.Id))).ToList();
+            var viewModel = new CoursesUsersViewModel
+            {
+                Courses = _context.Courses.ToList(),
+                Users = users
+            };
+            return View(viewModel);
+        }
+        [HttpPost]
+        public ActionResult AssignTrainee(CoursesUsersViewModel viewModel)
+        {
+            var model = new CourseTrainee
+            {
+                CourseId = viewModel.CourseId,
+                UserId = viewModel.UserId
+            };
+            try
+            {
+                _context.CourseTrainees.Add(model);
+                _context.SaveChanges();
+            }
+            catch (System.Exception)
+            {
+                ModelState.AddModelError("duplicate", "User already existed in team");
+                var role = _context.Roles.SingleOrDefault(r => r.Name.Equals(Role.Trainee));
+                var users = _context.Users
+                    .Where(m => m.Roles.Any(r => r.RoleId.Equals(role.Id))).ToList();
+                var NewviewModel = new CoursesUsersViewModel
+                {
+                    Courses = _context.Courses.ToList(),
+                    Users = users
+                };
+                return View(NewviewModel);
+            }
+            return RedirectToAction("ShowCourse");
+        }
+        [HttpGet]
+        public ActionResult RemoveTrainee(int id, string traineeId)
+        {
+            var userinCourse = _context.CourseTrainees.SingleOrDefault(
+              u => u.CourseId == id && u.UserId == traineeId);
+
+            if (userinCourse == null) return HttpNotFound();
+
+            _context.CourseTrainees.Remove(userinCourse);
+            _context.SaveChanges();
+
+            return RedirectToAction("ShowTrainees", new { id = id });
+        }
+
+
 
     }
 }

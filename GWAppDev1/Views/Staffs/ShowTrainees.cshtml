@@ -1,9 +1,12 @@
 ﻿@model IEnumerable<GWAppDev1.Models.ApplicationUser>
 @{
-    ViewBag.Title = "ShowTrainers";
+    ViewBag.Title = "ShowTrainees";
 }
 
-<h2>Show Trainers in Course</h2>
+<h2>Show Trainees in Course</h2>
+<div class="form-group">
+    @Html.ActionLink("Back to Show Courses", "ShowCourse", null, new { @class = "btn btn-primary" })
+</div>
 <table class="table table-striped">
     <thread>
         <tr>
@@ -14,9 +17,12 @@
         @foreach (var trainee in Model)
         {
             <tr>
-                <td>@trainee.Email</td>
                 <td>
-                    @Html.ActionLink("Remove", "RemoveTrainers", new { id = trainee.Id }, new { @class = "btn btn-danger" })
+                    @trainee.Email @Html.ActionLink("Remove",
+"RemoveTrainee",
+new { id = ViewBag.courseId, traineeId = trainee.Id }, new { @class = "btn btn-danger" })
+                </td>
+                <td>
                 </td>
             </tr>
         }

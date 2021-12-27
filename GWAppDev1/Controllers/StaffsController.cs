@@ -365,7 +365,7 @@ namespace GWAppDev1.Controllers
             }
             catch (System.Exception)
             {
-                ModelState.AddModelError("duplicate", "User already existed in course");
+                ModelState.AddModelError("duplicate", "User already existed in team");
                 var role = _context.Roles
                     .SingleOrDefault(r => r.Name.Equals(Role.Trainer));
                 var users = _context.Users
@@ -404,6 +404,7 @@ namespace GWAppDev1.Controllers
             ViewBag.courseId = id;
             return View(users);
         }
+
         [HttpGet]
         public ActionResult AssignTrainee()
         {

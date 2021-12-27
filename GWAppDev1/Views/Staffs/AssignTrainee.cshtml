@@ -8,7 +8,7 @@
 {
     <div class="form-group">
         <label>Course</label>
-        @Html.DropDownListFor(m => m.Courses, new SelectList(Model.Courses, "Id", "CourseName"),
+        @Html.DropDownListFor(m => m.CourseId, new SelectList(Model.Courses, "Id", "CourseName"),
          "Select Course Name",
          new { @class = "form-control" })
     </div>

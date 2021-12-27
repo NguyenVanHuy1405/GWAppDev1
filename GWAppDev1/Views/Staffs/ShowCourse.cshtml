@@ -3,17 +3,19 @@
     ViewBag.Title = "ShowCourse";
 }
 
-<h2>ShowCourse</h2>
+<h2>Show All Course</h2>
 <div class="form-group">
     @Html.ActionLink("Back to Home", "Index", "Staffs", null, new { @class = "btn btn-primary" })
 </div>
 <div class="form-group">
     @Html.ActionLink("Create a new Course", "CreateCourse", null, new { @class = "btn btn-primary" })
+    @Html.ActionLink("Assign Trainers", "AssignTrainer", null, new { @class = "btn btn-success" })
+    @Html.ActionLink("Assign Trainees", "AssignTrainee", null, new { @class = "btn btn-success" })
 </div>
 @using (Html.BeginForm("ShowCourse", "Staffs", FormMethod.Get))
 {
     <div class="form-group">
-        @Html.TextBox("searchString", null, new { @class = "form-control", placeholder = "Search by Course Name" })
+        @Html.TextBox("searchString", null, new { @class = "form-control", placeholder = "Search by trainee name or age" })
     </div>
     <button type="submit" class="btn btn-primary">Search</button>
 }
@@ -31,20 +33,18 @@
         @foreach (var course in Model)
         {
             <tr>
-               <td>@course.CourseName</td>
-               <td>@course.Description</td>
+                <td>@course.CourseName</td>
+                <td>@course.Description</td>
                 <td>@course.CourseCategory.NameCourseCategory</td>
                 <td>
                     @Html.ActionLink("Edit Course", "EditCourse", new { id = course.Id },
                     new { @class = "btn btn-success" })
                     @Html.ActionLink("Delete Course", "DeleteCourse", new { id = course.Id }
                     , new { @class = "btn btn-danger", onClick = "return confirm('Are you sure?')" })
-                    @Html.ActionLink("Assign Trainer", "AssignTrainer", null, new { @class = "btn btn-success" })
                     @Html.ActionLink(" Show Trainers", "ShowTrainers", new { id = course.Id }, new { @class = "btn btn-primary" })
+                    @Html.ActionLink(" Show Trainees", "ShowTrainees", new { id = course.Id }, new { @class = "btn btn-primary" })
                 </td>
             </tr>
         }
     </tbody>
 </table>
-
-

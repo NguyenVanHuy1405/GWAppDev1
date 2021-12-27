@@ -117,7 +117,7 @@ namespace GWAppDev1.Controllers
         {
             //Get current user ID
             var userId = User.Identity.GetUserId();
-            var users = _context.CoursesTrainers
+            var users = _context.CourseTrainees
                 .Where(u => u.CourseId == id)
                 .Select(u => u.User)
                 .ToList();

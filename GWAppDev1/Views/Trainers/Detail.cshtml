@@ -1,5 +1,4 @@
-﻿
-@model GWAppDev1.Models.Trainer
+﻿@model GWAppDev1.Models.Trainer
 @{
     ViewBag.Title = "Detail";
 }
@@ -7,6 +6,8 @@
 <h2>Trainee Detail</h2>
 <div class="form-group">
     @Html.ActionLink("Back to ShowTrainerInfo", "Index", null, new { @class = "btn btn-primary" })
+    @Html.ActionLink("Update Profile", "UpdateProfileOfTrainer", "Trainers", new { id = Model.Id }, new { @class = "btn btn-primary" })
+    @Html.ActionLink("View Course", "ViewCourse", "Trainers", new { @class = "btn btn-info" })
 </div>
 <div class="panel panel-default">
     <div class="panel-heading">@Model.Fullname</div>
@@ -17,4 +18,3 @@
         <p>Specialty :@Model.Specialty</p>
     </div>
 </div>
-

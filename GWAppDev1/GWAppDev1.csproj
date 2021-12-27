@@ -339,6 +339,7 @@
     <Content Include="Views\Staffs\ShowTrainees.cshtml" />
     <Content Include="Views\Staffs\AssignTrainer.cshtml" />
     <Content Include="Views\Staffs\AssignTrainee.cshtml" />
+    <Content Include="Views\Trainees\ShowAllCourses.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

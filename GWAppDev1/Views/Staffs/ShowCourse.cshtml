@@ -41,8 +41,6 @@
                     , new { @class = "btn btn-danger", onClick = "return confirm('Are you sure?')" })
                     @Html.ActionLink("Assign Trainer", "AssignTrainer", null, new { @class = "btn btn-success" })
                     @Html.ActionLink(" Show Trainers", "ShowTrainers", new { id = course.Id }, new { @class = "btn btn-primary" })
-                    @Html.ActionLink("Assign Trainer", "AssignTrainee", null, new { @class = "btn btn-success" })
-                    @Html.ActionLink(" Show Trainers", "ShowTrainees", new { id = course.Id }, new { @class = "btn btn-primary" })
                 </td>
             </tr>
         }

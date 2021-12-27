@@ -177,8 +177,21 @@ namespace GWAppDev1.Controllers
                 NameCourseCategory = model.NameCourseCategory,
                 Descriptions = model.Descriptions
             };
-            _context.courseCategories.Add(newCourseCategory);
-            _context.SaveChanges();
+            try
+            {
+                _context.courseCategories.Add(newCourseCategory);
+                _context.SaveChanges();
+            }
+            catch(System.Exception)
+            {
+                ModelState.AddModelError("duplicate", "CourseCategory already existed");
+                var NewCourseCategory = new CourseCategory()
+                {
+                    NameCourseCategory = model.NameCourseCategory,
+                    Descriptions=model.Descriptions
+                };
+                return View(NewCourseCategory); 
+            };
             return RedirectToAction("ShowCourseCategory");
         }
         [HttpGet]
@@ -233,6 +246,7 @@ namespace GWAppDev1.Controllers
             }
             return View(course);
         }
+
         [HttpGet]
         public ActionResult CreateCourse()
         {

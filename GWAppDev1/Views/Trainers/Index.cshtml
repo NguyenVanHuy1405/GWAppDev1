@@ -26,8 +26,7 @@
                 <td>@trainer.Address</td>
                 <td>@trainer.Specialty</td>
                 <td>
-                    @Html.ActionLink("DetailTrainerInfo", "Detail", new { id = trainer.Id }, new { @class = "btn btn-success" })
-                    @Html.ActionLink("EditTrainerInfo", "EditTrainerInfo", new { id = trainer.Id }, new {@class="btn btn-primary"})
+                    @Html.ActionLink("DetailTraineeInfo", "Detail", new { id = trainer.Id }, new { @class = "btn btn-success" })
                 </td>
             </tr>
         }

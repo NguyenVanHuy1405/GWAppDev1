@@ -1,5 +1,6 @@
 ﻿using GWAppDev1.Models;
 using GWAppDev1.Utils;
+using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using System;
 using System.Collections.Generic;
@@ -63,6 +64,36 @@ namespace GWAppDev1.Controllers
                 return HttpNotFound();
             }
             return View(trainee);
+        }
+        [HttpGet]
+        public ActionResult ShowAllCourses()
+        {
+            var userId = User.Identity.GetUserId();
+            var courses = _context.CourseTrainees
+                .Where(u => u.UserId.Equals(userId))
+                .Select(u => u.Course)
+                .ToList();
+            if (courses == null)
+            {
+                return HttpNotFound();
+            }
+            return View(courses);
+        }
+        [HttpGet]
+        public ActionResult ShowOtherTrainee(int id)
+        {
+            //get current user Id
+            var userId = User.Identity.GetUserId();
+            var users = _context.CourseTrainees
+                .Where(u => u.CourseId == id)
+                .Select(u => u.User)
+                .ToList();
+            var role = _context.Roles
+              .SingleOrDefault(r => r.Name.Equals(Role.Trainee));
+            var newusers = users
+             .Where(m => m.Roles.Any(r => r.RoleId.Equals(role.Id)) && m.Id != userId)
+             .ToList();
+            return View(newusers);
         }
     }
 }

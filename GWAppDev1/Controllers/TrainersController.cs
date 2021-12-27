@@ -1,5 +1,6 @@
 ﻿using GWAppDev1.Models;
 using GWAppDev1.Utils;
+using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using System;
 using System.Collections.Generic;
@@ -65,35 +66,67 @@ namespace GWAppDev1.Controllers
             return View(trainer);
         }
         [HttpGet]
-        public ActionResult EditTrainerInfo(int id)
+        [Authorize(Roles = Role.Trainer)]
+        public ActionResult UpdateProfileOfTrainer(int id)
         {
-            var trainer = _context.Trainers.SingleOrDefault(t => t.Id == id);
-            if (trainer == null)
+            var traineeInDb = _context.Trainers.SingleOrDefault(t => t.Id == id);
+            if (traineeInDb == null)
             {
                 return HttpNotFound();
             }
-            return View(trainer);
+            return View(traineeInDb);
         }
         [HttpPost]
-
-        public ActionResult EditTrainerInfo(Trainer model)
+        [Authorize(Roles = Role.Trainer)]
+        public ActionResult UpdateProfileOfTrainer(Trainer trainer)
         {
             if (!ModelState.IsValid)
             {
-                return View(model);
+                return View(trainer);
             }
-            var trainerInDb = _context.Trainers.SingleOrDefault(t => t.Id == model.Id);
-
+            var trainerInDb = _context.Trainers.SingleOrDefault(t => t.Id == trainer.Id);
             if (trainerInDb == null)
             {
                 return HttpNotFound();
             }
-            trainerInDb.Fullname = model.Fullname;
-            trainerInDb.Age = model.Age;
-            trainerInDb.Address = model.Address;
-            trainerInDb.Specialty = model.Specialty;
+            trainerInDb.Fullname = trainer.Fullname;
+            trainerInDb.Age = trainer.Age;
+            trainerInDb.Address = trainer.Address;
+            trainerInDb.Specialty = trainer.Specialty;
+
             _context.SaveChanges();
-            return RedirectToAction("ShowTrainerInfo");
+            return RedirectToAction("Detail", "Trainers");
+        }
+
+        [Authorize(Roles = Role.Trainer)]
+        [HttpGet]
+        public ActionResult ViewCourse()
+        {
+            //var courseCategoryInDB = _context.courseCategories.ToList();
+            var userId = User.Identity.GetUserId();
+            var courseInDB = _context
+                .CoursesTrainers
+                .Where(t => t.UserId == userId)
+                .Select(t => t.Course)
+                .ToList();
+            return View(courseInDB);
+        }
+
+        [HttpGet]
+        public ActionResult ViewAllTrainees(int id)
+        {
+            //Get current user ID
+            var userId = User.Identity.GetUserId();
+            var users = _context.CoursesTrainers
+                .Where(u => u.CourseId == id)
+                .Select(u => u.User)
+                .ToList();
+            var role = _context.Roles
+              .SingleOrDefault(r => r.Name.Equals(Role.Trainee));
+            var newusers = users
+             .Where(m => m.Roles.Any(r => r.RoleId.Equals(role.Id)) && m.Id != userId)
+             .ToList();
+            return View(newusers);
         }
 
     }

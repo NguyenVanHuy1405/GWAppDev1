@@ -335,12 +335,14 @@
     <Content Include="Views\Trainees\Detail.cshtml" />
     <Content Include="Views\Trainers\Index.cshtml" />
     <Content Include="Views\Trainers\Detail.cshtml" />
-    <Content Include="Views\Trainers\EditTrainerInfo.cshtml" />
     <Content Include="Views\Staffs\ShowTrainees.cshtml" />
     <Content Include="Views\Staffs\AssignTrainer.cshtml" />
     <Content Include="Views\Staffs\AssignTrainee.cshtml" />
     <Content Include="Views\Trainees\ShowAllCourses.cshtml" />
     <Content Include="Views\Trainees\ShowOtherTrainee.cshtml" />
+    <Content Include="Views\Trainers\UpdateProfileOfTrainer.cshtml" />
+    <Content Include="Views\Trainers\ViewAllTrainees.cshtml" />
+    <Content Include="Views\Trainers\ViewCourse.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
